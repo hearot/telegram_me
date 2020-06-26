@@ -9,7 +9,12 @@ A simple scraper for getting information from https://t.me links.
 ```python
 from telegram_me import Link
 
-print(Link.from_username("hearot").name)  # Output: Hearot
+link = Link.from_username("Wikisource_Bot")
+
+print(link.bio)  # Output: A @wiki version for wikisource.org. [...]
+print(link.image)  # Output: https://cdn4.telesco.pe/file/...
+print(link.name)  # Output: Wikisource Search
+print(link.username)  # Output: Wikisource_bot
 ```
 
 ### Installation
