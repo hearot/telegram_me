@@ -66,7 +66,10 @@ setup(
     ],
     description="A simple scraper for getting information from t.me links",
     install_requires=requirements,
-    keywords="bot bots chat messenger mtproto python telegram telegram_me me telegramme scraping",
+    keywords=(
+        "bot bots chat messenger mtproto python telegram "
+        "telegram_me me telegramme scraping"
+    ),
     license="MIT",
     long_description=long_description,
     long_description_content_type="text/markdown",

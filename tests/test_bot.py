@@ -20,41 +20,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
-from typing import Optional
-
-import attr
-import requests
-from lxml import html
+from telegram_me import Link
 
 
-TELEGRAM_BIO_XPATH = "//div[starts-with(@class, 'tgme_page_description')]"
-TELEGRAM_LINK_TEMPLATE = "https://t.me/{username}"
-TELEGRAM_NAME_XPATH = "//div[@class='tgme_page_title']/span"
-TELEGRAM_PHOTO_XPATH = "//img[@class='tgme_page_photo_image']/@src"
+BOT_BIO = (
+    "A @wiki version for wikisource.org. "
+    "https://github.com/hearot/wikisourcebot"
+)
+BOT_IMAGE_CONTENT = "telesco.pe"
+BOT_USERNAME = "Wikisource_bot"
+BOT_NAME = "Wikisource Search"
 
 
-@attr.s(auto_attribs=True)
-class Link:
-    bio: Optional[str]
-    image: Optional[str]
-    name: Optional[str]
-    username: str
+def test_bot():
+    bot = Link.from_username(BOT_USERNAME)
 
-    @classmethod
-    def from_username(cls, username: str) -> "Link":
-        username = username.strip("@")
-
-        page = requests.get(TELEGRAM_LINK_TEMPLATE.format(username=username))
-        tree = html.fromstring(page.text)
-
-        bio = tree.xpath(TELEGRAM_BIO_XPATH)
-        bio = bio[0].text_content().strip() if bio else None
-
-        image = tree.xpath(TELEGRAM_PHOTO_XPATH)
-        image = image[0].strip() if image else None
-
-        name = tree.xpath(TELEGRAM_NAME_XPATH)
-        name = name[0].text_content().strip() if name else None
-
-        return cls(bio, image, name, username)
+    assert BOT_BIO == bot.bio
+    assert BOT_IMAGE_CONTENT in bot.image
+    assert BOT_NAME == bot.name
+    assert BOT_USERNAME == bot.username
