@@ -26,7 +26,7 @@ __copyright__ = "Copyright (C) 2020 Hearot <https://github.com/hearot>"
 __license__ = "MIT License"
 __package__ = "telegram_me"
 __url__ = "https://github.com/hearot/telegram_me"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 from .username import Link  # noqa
